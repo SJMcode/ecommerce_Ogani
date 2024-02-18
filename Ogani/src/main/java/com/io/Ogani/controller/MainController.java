@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
 
-//    @GetMapping("/")
-//    public String viewHomePage(){
-//        return "index";
-//    }
+    @GetMapping("")
+    public String viewHomePage(){
+        return "index";
+    }
 
 
 
@@ -18,5 +18,7 @@ public class MainController {
     public String viewLoginPage(){
         return "login";
     }
+
+
 
 }

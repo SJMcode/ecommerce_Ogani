@@ -15,6 +15,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static org.springframework.security.authorization.AuthenticatedAuthorizationManager.authenticated;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -46,13 +48,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception{
 
-        http.authorizeRequests().anyRequest()
-                .authenticated()
+        http.authorizeRequests()
+                .antMatchers("/users/**").hasAnyAuthority("Admin")
+                .antMatchers("/categories/**").hasAnyAuthority("Admin", "Editor")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .usernameParameter("email")
-                .permitAll();
+                .permitAll()
+                .and()
+                .logout().permitAll();
+//                .and().rememberMe().key("AbcDefghijklmopqrs_1234567890")
+//                .tokenValiditySeconds(7* 24 * 60 * 60);
     }
 
     @Override

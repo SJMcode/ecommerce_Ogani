@@ -126,6 +126,8 @@ public class User {
         return Objects.hash(id);
     }
 
+
+
     @Override
     public String toString() {
         return "User{" +
@@ -135,4 +137,7 @@ public class User {
                 ", roles=" + roles +
                 '}';
     }
+
+
+
 }

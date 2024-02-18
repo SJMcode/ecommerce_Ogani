@@ -31,7 +31,7 @@ public class UserRepositoryTest {
 
         @Test
         public void testCeateUserWithOneROle(){
-            Role roleAdmin = entityManager.find(Role.class, 7);
+            Role roleAdmin = entityManager.find(Role.class, 1);
                 User userSaf = new User("safir@gmail.com","saf123", "safir", "manghat");
                 userSaf.addRole(roleAdmin);
                 User savedUser = repo.save(userSaf);
@@ -41,8 +41,8 @@ public class UserRepositoryTest {
     @Test
     public void testCeateUserWithTwoROle(){
         User userRavi = new User("ravi@gmail.com","ravi2020", "ravi", "kumar");
-        Role roleEditor = new Role(9);
-        Role roleAssistant = new Role(11);
+        Role roleEditor = new Role(3);
+        Role roleAssistant = new Role(5);
         userRavi.addRole(roleEditor);
         userRavi.addRole(roleAssistant);
 
@@ -98,6 +98,16 @@ public class UserRepositoryTest {
         String email = "ola@gmail.com";
         User user = repo.getUserByEmail(email);
         assertThat(user).isNotNull();
+
+    }
+
+    @Test
+    public void testCountById(){
+
+            Integer id =1;
+            Long countById = repo.countById(id);
+
+            assertThat(countById).isNotNull().isGreaterThan(0);
 
     }
 
